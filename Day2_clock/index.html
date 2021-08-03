@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Clock</title>
+  </head>
+  <body>
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand sec-hand"></div>
+      </div>
+    </div>
+
+    
+    
+    
+    <style>
+        html{
+            background: url('./sea.jpeg');
+            background-size: cover;
+            text-align: center;
+        }
+        body{
+            display: flex;
+            flex: 1;
+            min-height: 94vh;
+            align-items: center;
+            justify-content: center;
+            /*border:10px solid black;*/
+        }
+        .clock{
+            width: 300px;
+            height: 300px;
+            border: 20px solid white;
+            border-radius: 50%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .clock-face{
+            display: flex;
+            height: 100%;
+            width: 100%;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+
+      
+     
+        }
+        .hand{
+            width: 50%;
+            height:6px;
+            background:white;
+            position: absolute;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition: all 0.05s;
+            transition-timing-function: cubic-bezier(0.1,2.7,0.58,1);
+        }
+        /* .hour-hand{
+            transform: rotate(0deg);
+            color: grey;
+          
+        }
+        .min-hand{
+
+        }
+        .sec-hound{
+
+        } */
+    </style>
+    <script>
+
+        const secondHand = document.querySelector('.sec-hand');
+        const minuteHand = document.querySelector('.min-hand');
+        const hourHand = document.querySelector('.hour-hand');
+
+        function setDate(){
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours   = now.getHours();
+            
+            const secondsDegrees = ((seconds / 60 )*360)+90;
+            const minutesDegrees = ((minutes / 60 )* 360)+90;
+            const hoursDegrees   = ((hours / 24 )* 360)+90;
+
+            console.log(hours+' : '+ minutes+' : '+seconds)
+            secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+            minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+            hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+        }
+
+        setInterval(setDate, 1000);
+    </script>
+  </body>
+</html>

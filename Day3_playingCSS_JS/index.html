@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing CSS</title>
+</head>
+<body>
+    
+    <h2>Update CSS Variables with<span class="h1">JS</span></h2>
+    <div class="controls">
+
+        <label for="spacing">Spacing :</label>
+        <input type="range" name="spacing" min="0" max="200" value="10" data-sizing="px">
+
+        <label for="range">Blur :</label>
+        <input type="range" name="blur" min="0" max="200" value="0" data-sizing="px">
+      
+        <label for="range">Base Color</label>
+        <input type="color" name="base" value="#ffc600">
+      
+    </div>
+
+        <img src="img.jpeg" alt="">
+
+</body>
+<script>
+ const inputs = document.querySelectorAll('.controls input')
+ 
+ function handleupdate(){
+     const suffix = this.dataset.sizing || '';
+     document.documentElement.style.setProperty(`--${this.name}`,this.value+suffix);
+ }
+
+ inputs.forEach(input => input.addEventListener('change',handleupdate));
+ inputs.forEach(input => input.addEventListener('mousemove',handleupdate));
+
+</script>
+<style>
+:root{
+    --base:#ffc600;
+    --spacing:10px;
+    --blur:0px;
+}
+
+
+body{
+ text-align: center;
+ background-color: #1C2833;
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 20px;
+ color: white;
+}
+img{
+    border:5px solid black;
+    border-radius: 10px;
+    height: 500px;
+    width: 700px;
+    padding: var(--spacing);
+    background: var(--base);
+    filter: blur(var(--blur));
+}
+
+
+</style>
+</html>
